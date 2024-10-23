@@ -9,17 +9,16 @@ namespace CRUD_PIZZA.DAO
         public PadraoDAO() { SetTabela(); }
         protected string tabela { get; set; }
         protected string NomeSpListagem { get; set; } = "sp_list";
-        protected abstract SqlParameter[] CriarParametrosId(T model);
-        protected abstract SqlParameter[] CriarParametrosNoId(T model);
+        protected abstract SqlParameter[] CriarParametros(T model);
         protected abstract T MontarModel(DataRow registro);
         protected abstract void SetTabela();
         public virtual void Insert(T model)
         {
-            HelperDAO.ExecutaProc("sp_insert_" + tabela, CriarParametrosId(model));
+            HelperDAO.ExecutaProc("sp_insert_" + tabela, CriarParametros(model));
         }
         public virtual void Update(T model)
         {
-            HelperDAO.ExecutaProc("sp_update_" + tabela, CriarParametrosNoId(model));
+            HelperDAO.ExecutaProc("sp_update_" + tabela, CriarParametros(model));
         }
         public virtual void Delete(int id)
         {

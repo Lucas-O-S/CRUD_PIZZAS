@@ -2,6 +2,6 @@
 {
     public abstract class PadraoViewModel
     {
-        int Id { get; set; }
+        public virtual int? id { get; set; }
     }
 }
