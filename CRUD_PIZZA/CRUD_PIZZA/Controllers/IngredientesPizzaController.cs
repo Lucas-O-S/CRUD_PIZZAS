@@ -10,5 +10,15 @@ namespace CRUD_PIZZA.Controllers
         {
             dao = new IngredientesPizzaDAO();
         }
+
+        protected override void ValidarDados(IngredientesPizzaViewModel model, string operacao)
+        {
+            base.ValidarDados(model, operacao);
+            if (String.IsNullOrEmpty(model.descricao))
+            {
+                ModelState.AddModelError("Descricao", "Descrição vazia");
+            }
+  
+        }
     }
 }

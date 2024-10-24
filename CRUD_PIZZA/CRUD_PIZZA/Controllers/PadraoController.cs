@@ -32,7 +32,7 @@ namespace CRUD_PIZZA.Controllers
             {
                 ViewBag.operacao = "I";
                 T model = Activator.CreateInstance(typeof(T)) as T;
-                return View(model);
+                return View(NomeViewForm, model);
             }
             catch (Exception erro)
             {
@@ -40,11 +40,11 @@ namespace CRUD_PIZZA.Controllers
             }
         }
 
-        protected virtual IActionResult Save(T model, string operacao)
+        public virtual IActionResult Save(T model, string operacao)
         {
             try
             {
-                ValidarDados();
+                ValidarDados(model, operacao);
                 if (ModelState.IsValid == false)
                 {
                     ViewBag.operacao = operacao;
@@ -67,7 +67,7 @@ namespace CRUD_PIZZA.Controllers
             }
         }
 
-        protected virtual void ValidarDados() { ModelState.Clear()}
+        protected virtual void ValidarDados(T model, string operacao) { ModelState.Clear(); }
 
         public IActionResult Edit(int id)
         {
@@ -78,7 +78,7 @@ namespace CRUD_PIZZA.Controllers
                 if (model == null)
                     return RedirectToAction(NomeViewIndex);
                 else
-                    return RedirectToAction(NomeViewForm);
+                    return View(NomeViewForm, model);
             }
             catch (Exception erro)
             {

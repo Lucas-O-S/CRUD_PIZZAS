@@ -52,7 +52,7 @@ namespace CRUD_PIZZA.DAO
             {
                 new SqlParameter("tabela",tabela)
             };
-            DataTable dt = HelperDAO.ExecutaProcSelect("sp_select", p);
+            DataTable dt = HelperDAO.ExecutaProcSelect(NomeSpListagem, p);
             List<T> list = new List<T>();   
             foreach (DataRow dr in dt.Rows)
                     list.Add(MontarModel(dr));

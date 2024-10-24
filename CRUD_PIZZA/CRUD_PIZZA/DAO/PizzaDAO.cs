@@ -13,7 +13,7 @@ namespace CRUD_PIZZA.DAO
 
         protected override SqlParameter[] CriarParametros(PizzaViewModel model)
         {
-            if (model.id == 0)
+            if (model.id == 0 || model.id == null)
             {
                 SqlParameter[] sp = new SqlParameter[]
                 {
