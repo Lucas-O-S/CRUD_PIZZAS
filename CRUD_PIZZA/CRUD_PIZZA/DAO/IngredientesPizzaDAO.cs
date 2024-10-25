@@ -14,7 +14,7 @@ namespace CRUD_PIZZA.DAO
 
         protected override SqlParameter[] CriarParametros(IngredientesPizzaViewModel model)
         {
-            if (model.id == 0)
+            if (model.id == 0 || model.id == null)
             {
                 SqlParameter[] sp = new SqlParameter[]
                 {
@@ -44,8 +44,11 @@ namespace CRUD_PIZZA.DAO
         {
             IngredientesPizzaViewModel model = new IngredientesPizzaViewModel();
             model.id = Convert.ToInt32(registro["id"]);
-            model.id = Convert.ToInt32(registro["pizzaId"]);
+            model.pizzaId = Convert.ToInt32(registro["pizzaId"]);
             model.descricao = Convert.ToString(registro["descricao"]);
+            PizzaDAO pizzaDAO = new PizzaDAO();
+            PizzaViewModel pizza = pizzaDAO.Consulta(model.pizzaId);
+            model.pizzaNome = pizza.descricao;
             return model;
 
         }

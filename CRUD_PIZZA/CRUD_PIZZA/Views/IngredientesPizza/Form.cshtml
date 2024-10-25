@@ -1,0 +1,51 @@
+﻿@model IngredientesPizzaViewModel
+
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	string? descricao;
+	int? pizzaId;
+	if (String.IsNullOrEmpty(Model.pizzaNome))
+		descricao = Context.Request.Query["descricao"];
+	else
+		descricao = Model.pizzaNome;
+	if (Model.pizzaId == null || Model.pizzaId == 0)
+		pizzaId = int.Parse(Context.Request.Query["pizzaId"]);
+	else
+		pizzaId = Model.pizzaId;
+
+
+
+}
+
+<h2>Cadastro de Ingredientes da Pizza @Model.pizzaNome</h2>
+
+<form action="Save" method="post" class="container">
+	<input type="hidden" name="operacao" value="@ViewBag.operacao" />
+	<input type="hidden" name="pizzaId" value="@pizzaId" />
+
+
+
+	@if (ViewBag.operacao == "A")
+	{
+		<label for="id" class="control-label">ID</label>
+
+		<input type="number" asp-for="id" value="@Model.id" readonly />
+
+		<span asp-validation-for="id" class="text-danger"></span>
+		<br />
+
+	}
+
+
+	<label for="descricao" class="control-label">Descrição</label>
+	<input asp-for="descricao" type="text" value="@Model.descricao" />
+	<span asp-validation-for="descricao" class="text-danger"></span>
+
+
+
+	<br />
+
+	<input type="submit" value="Salvar dados">
+
+	<br />
+</form>

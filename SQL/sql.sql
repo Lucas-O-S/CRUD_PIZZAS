@@ -58,7 +58,7 @@ create or alter procedure sp_insert_tbIngredientesPizza(
 )
 as
 begin
-	insert into tbIngredientesPizza(pizzaId,descricao) values (@descricao,@pizzaId)
+	insert into tbIngredientesPizza(pizzaId,descricao) values (@pizzaId,@descricao)
 end
 go
 

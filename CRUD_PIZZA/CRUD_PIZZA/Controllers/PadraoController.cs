@@ -1,6 +1,7 @@
 ﻿using CRUD_PIZZA.DAO;
 using CRUD_PIZZA.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace CRUD_PIZZA.Controllers
 {
@@ -99,5 +100,7 @@ namespace CRUD_PIZZA.Controllers
                 return View("Error", new ErrorViewModel(erro.ToString()));
             }
         }
-    }
+
+   
+	}
 }

@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Listagem de Ferramentas</h2>
+<h2>Listagem de Pizzas</h2>
 
 <a href="/pizza/create"> Novo Negistro </a>
 <br />
@@ -26,7 +26,7 @@
             </th>
             <th>@pizza.id</th>
             <th>@pizza.descricao</th>
-            <th><a href="/IngredientesPizza/Index?id=@pizza.id">Visualizar</a></th>
+            <th><a href="/IngredientesPizza/Index?pizzaId=@pizza.id&descricao=@pizza.descricao">Visualizar</a></th>
 
         </tr>
 

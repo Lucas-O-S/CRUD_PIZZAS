@@ -26,6 +26,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lucas/source/repos/CRUD_PIZZAS/CRUD_PIZZA/CRUD_PIZZA/Views/IngredientesPizza/Form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVzUGl6emFcRm9ybS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lucas/source/repos/CRUD_PIZZAS/CRUD_PIZZA/CRUD_PIZZA/Views/IngredientesPizza/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVkaWVudGVzUGl6emFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lucas/source/repos/CRUD_PIZZAS/CRUD_PIZZA/CRUD_PIZZA/Views/Pizza/Form.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGl6emFcRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
