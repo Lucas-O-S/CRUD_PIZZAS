@@ -83,3 +83,15 @@ begin
 	update tbIngredientesPizza set pizzaId = @pizzaId, descricao = @descricao where id = @id
 end
 go
+
+create or alter procedure sp_list_tbIngredientesPizza(
+	@tabela varchar(max),
+	@pizzaId int
+)
+as
+begin
+	declare @sql varchar(max)
+	set @sql = 'select * from  ' + @tabela + ' where pizzaid = ' + cast(@pizzaId as varchar(max))
+	exec(@sql)
+end
+go
