@@ -1,19 +1,13 @@
 ﻿@model List<IngredientesPizzaViewModel>
 @{
-    string? descricao;
-    int? pizzaId;
-
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    descricao = Context.Request.Query["descricao"];
-    pizzaId = int.Parse(Context.Request.Query["pizzaId"]);
-
 
 }
 
-<h2>Ingredientes de Pizza @descricao</h2> 
 
-<button><a href="/IngredientesPizza/create?pizzaId=@pizzaId&descricao=@descricao"> Novo Negistro </a></button>
+<h2>Ingredientes de Pizza @ViewBag.descricaoPizza</h2>
+
+<button><a href="/IngredientesPizza/CriarIngrediente?pizzaId=@ViewBag.pizzaId&descricaoPizza=@ViewBag.descricaoPizza"> Novo Negistro </a></button>
 <br />
 <br />
 
@@ -32,10 +26,11 @@
 
     @foreach (var ingredientesPizza in Model)
     {
-        if(pizzaId == ingredientesPizza.pizzaId){
+        if (ViewBag.pizzaId == ingredientesPizza.pizzaId)
+        {
             <tr>
                 <th>
-                    <a href="/IngredientesPizza/Edit?id=@ingredientesPizza.id&pizzaId=@pizzaId&descricao=@descricao">editar</a>
+                    <a href="/IngredientesPizza/Edit?id=@ingredientesPizza.id&pizzaId=@ViewBag.pizzaId&descricao=@ViewBag.descricao">editar</a>
                     <a href="javascript:Delete(@ingredientesPizza.id)">apagar</a>
                 </th>
                 <th>@ingredientesPizza.id</th>
@@ -52,7 +47,7 @@
 <script>
     function Delete(id) {
         if (confirm("Confirmar a exclusão do registro?")) {
-            location.href = "IngredientesPizza/Delete?Id=" + id;
+            location.href = "Delete?Id=" + id;
         }
     }
 </script>

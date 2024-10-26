@@ -10,6 +10,7 @@ namespace CRUD_PIZZA.DAO
         protected override void SetTabela()
         {
             tabela = "tbIngredientesPizza";
+            NomeSpListagem = "sp_list_tbIngredientesPizza";
         }
 
         protected override SqlParameter[] CriarParametros(IngredientesPizzaViewModel model)
@@ -51,6 +52,21 @@ namespace CRUD_PIZZA.DAO
             model.pizzaNome = pizza.descricao;
             return model;
 
+        }
+
+        public List<IngredientesPizzaViewModel> ListagemIngredientes(int pizzaId)
+        {
+            var p = new SqlParameter[]
+            {
+                new SqlParameter("tabela",tabela),
+                new SqlParameter("Pizzaid",pizzaId)
+
+            };
+            DataTable dt = HelperDAO.ExecutaProcSelect(NomeSpListagem, p);
+            List<IngredientesPizzaViewModel> list = new List<IngredientesPizzaViewModel>();
+            foreach (DataRow dr in dt.Rows)
+                list.Add(MontarModel(dr));
+            return list;
         }
     }
 }

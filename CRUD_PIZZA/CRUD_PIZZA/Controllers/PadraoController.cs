@@ -11,7 +11,11 @@ namespace CRUD_PIZZA.Controllers
         protected PadraoDAO<T> dao {  get; set; }
         protected string NomeViewIndex { get; set; } = "index";
         protected string NomeViewForm { get; set; } = "form";
-        
+
+        protected virtual IActionResult RedirecionaParaIndex(T model)
+        {
+            return RedirectToAction(NomeViewIndex);
+        }
 
         public virtual IActionResult Index()
         {
@@ -59,7 +63,7 @@ namespace CRUD_PIZZA.Controllers
                     
                     else
                         dao.Update(model);
-                    return RedirectToAction(NomeViewIndex);
+                    return RedirecionaParaIndex(model);
                 }
             }
             catch (Exception erro)
@@ -70,14 +74,14 @@ namespace CRUD_PIZZA.Controllers
 
         protected virtual void ValidarDados(T model, string operacao) { ModelState.Clear(); }
 
-        public IActionResult Edit(int id)
+        public virtual IActionResult Edit(int id)
         {
             try
             {
                 ViewBag.operacao = "A";
                 var model = dao.Consulta(id);
                 if (model == null)
-                    return RedirectToAction(NomeViewIndex);
+                    return RedirecionaParaIndex(model);
                 else
                     return View(NomeViewForm, model);
             }
@@ -92,14 +96,19 @@ namespace CRUD_PIZZA.Controllers
         {
             try
             {
-                dao.Delete(id);
-                return RedirectToAction(NomeViewIndex);
+                var model = dao.Consulta(id);
+                if (model != null)
+                    dao.Delete(id);
+
+                return RedirecionaParaIndex(model);
             }
             catch (Exception erro)
             {
                 return View("Error", new ErrorViewModel(erro.ToString()));
             }
         }
+
+
 
    
 	}

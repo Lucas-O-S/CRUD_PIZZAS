@@ -9,7 +9,8 @@ namespace CRUD_PIZZA.Controllers
 		public IngredientesPizzaController()
 		{
 			dao = new IngredientesPizzaDAO();
-		}
+
+        }
 
 		protected override void ValidarDados(IngredientesPizzaViewModel model, string operacao)
 		{
@@ -20,29 +21,17 @@ namespace CRUD_PIZZA.Controllers
 			}
 
 		}
-		public override IActionResult Save(IngredientesPizzaViewModel model, string operacao)
+
+		public IActionResult ListaIngredientes(int pizzaID, string descricaoPizza)
 		{
 			try
 			{
-				ValidarDados(model, operacao);
-				if (ModelState.IsValid == false)
-				{
-					ViewBag.operacao = operacao;
-					return View("Create", new { pizzaId = model.pizzaId, descricao = model.pizzaNome });
-				}
-				else
-				{
-					if (operacao == "I")
-						dao.Insert(model);
+				ViewBag.descricaoPizza = descricaoPizza;
+				ViewBag.pizzaId = pizzaID;
+				
+				var lista = (dao as IngredientesPizzaDAO).ListagemIngredientes(pizzaID);
 
-
-					else
-						dao.Update(model);
-
-
-
-					return RedirectToAction(NomeViewIndex, new { pizzaId = model.pizzaId, descricao = model.pizzaNome });
-				}
+				return View(NomeViewIndex,lista);
 			}
 			catch (Exception erro)
 			{
@@ -50,7 +39,32 @@ namespace CRUD_PIZZA.Controllers
 			}
 		}
 
+		public IActionResult CriarIngrediente(int pizzaID, string descricaoPizza)
+		{
+            try
+            {
+                ViewBag.Operacao = "I";
+                var model = new IngredientesPizzaViewModel();
+                model.pizzaId = pizzaID;
+				model.pizzaNome = descricaoPizza;
+                return View(NomeViewForm, model);
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel(erro.ToString()));
+            }
+        }
+
+        protected override IActionResult RedirecionaParaIndex(IngredientesPizzaViewModel model)
+        {
+			return RedirectToAction("ListaIngredientes", routeValues: new { pizzaId = model.pizzaId, descricaoPizza = model.pizzaNome });
+        }
 
 
-	}
+
+
+
+
+
     }
+}

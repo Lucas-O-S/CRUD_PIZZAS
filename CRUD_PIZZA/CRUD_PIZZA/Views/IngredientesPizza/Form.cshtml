@@ -2,17 +2,6 @@
 
 @{
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	string? descricao;
-	int? pizzaId;
-	if (String.IsNullOrEmpty(Model.pizzaNome))
-		descricao = Context.Request.Query["descricao"];
-	else
-		descricao = Model.pizzaNome;
-	if (Model.pizzaId == null || Model.pizzaId == 0)
-		pizzaId = int.Parse(Context.Request.Query["pizzaId"]);
-	else
-		pizzaId = Model.pizzaId;
-
 
 
 }
@@ -21,7 +10,8 @@
 
 <form action="Save" method="post" class="container">
 	<input type="hidden" name="operacao" value="@ViewBag.operacao" />
-	<input type="hidden" name="pizzaId" value="@pizzaId" />
+	<input type="hidden" asp-for="pizzaId" value="@Model.pizzaId" />
+	<input type="hidden" asp-for="pizzaNome" value="@Model.pizzaNome" />
 
 
 
